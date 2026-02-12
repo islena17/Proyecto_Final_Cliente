@@ -1,15 +1,35 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import { Tarea } from "./models/Tarea"
 import FormularioTarea from './components/FormularioTarea'
 import MostrarPendientes from './components/MostarPendientes'
+import MostrarCompletadas from './components/MostrarCompletadas'
 
 function App() {
   const [count, setCount] = useState(0)
 
   //aqui pongo toda la logica para las tareas
   const [listaTareas, setListaTareas] = useState<Tarea[]>([]);
+
+  //aqui pongo la logica para completar las tareas 
+  const completarTarea = (id: string) => {
+    setListaTareas((prev) =>
+      prev.map((t) => {
+        if (t.id !== id) return t;
+        const nueva = new Tarea(t.nombre, t.titulo, t.descripcion, t.fechaLimite);
+        nueva.id = t.id;
+        nueva.fechaCreacion = t.fechaCreacion;
+        nueva.estaCompletada();
+        nueva.estado = "completada";
+        return nueva;
+      }));
+  };
+
+  //eliminar tareas
+  const eliminarTarea = (id: string) => {
+    setListaTareas(prev =>
+      prev.filter(t => t.id !== id)
+    );
+  };
 
   return (
     <>
@@ -23,7 +43,11 @@ function App() {
             </div>
 
             <div className="bg-white rounded-2xl shadow-lg p-6">
-              <MostrarPendientes tareas={listaTareas}/>
+              <MostrarPendientes tareas={listaTareas} completar={completarTarea} eliminar={eliminarTarea}/>
+            </div>
+
+             <div className="bg-white rounded-2xl shadow-lg p-6">
+              <MostrarCompletadas tareas={listaTareas} eliminar={eliminarTarea}/>
             </div>
           </div>
         </div>
