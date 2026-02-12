@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import { Tarea } from "./models/Tarea"
 import FormularioTarea from './components/FormularioTarea'
+import MostrarPendientes from './components/MostarPendientes'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +20,10 @@ function App() {
           <div className="space-y-8">
             <div className="bg-white rounded-2xl shadow-lg p-6">
               <FormularioTarea crear={(t) => setListaTareas(prev => [...prev, t])} />
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-lg p-6">
+              <MostrarPendientes tareas={listaTareas}/>
             </div>
           </div>
         </div>
