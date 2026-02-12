@@ -3,9 +3,9 @@ import { Tarea } from "./models/Tarea"
 import FormularioTarea from './components/FormularioTarea'
 import MostrarPendientes from './components/MostarPendientes'
 import MostrarCompletadas from './components/MostrarCompletadas'
+import MostrarAtrasadas from './components/MostrarAtrasadas'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   //aqui pongo toda la logica para las tareas
   const [listaTareas, setListaTareas] = useState<Tarea[]>([]);
@@ -48,6 +48,10 @@ function App() {
 
              <div className="bg-white rounded-2xl shadow-lg p-6">
               <MostrarCompletadas tareas={listaTareas} eliminar={eliminarTarea}/>
+            </div>
+
+             <div className="bg-white rounded-2xl shadow-lg p-6">
+              <MostrarAtrasadas tareas={listaTareas} eliminar={eliminarTarea}/>
             </div>
           </div>
         </div>
