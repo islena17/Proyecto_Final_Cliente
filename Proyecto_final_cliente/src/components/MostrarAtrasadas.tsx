@@ -9,14 +9,11 @@ type Props = {
 export default function MostrarAtrasadas({ tareas, eliminar }: Props) {
 
     const fechaActual = new Date();
-    const atrasadas = tareas.filter(t => t.fechaLimite < fechaActual && !t.completada);// no lo he podido testear
+    const atrasadas = tareas.filter(t => t.fechaLimite < fechaActual && !t.completada);// filtramos todas aquellas tareas que estén atrasdas y NO estén completadas
 
     return (
 
         <div>
-            <h2 className="text-3xl font-bold text-red-700 mb-6">
-                Tareas Atrasadas
-            </h2>
 
             <div className="grid gap-6">
                 {atrasadas.map((t) => (
@@ -44,7 +41,7 @@ export default function MostrarAtrasadas({ tareas, eliminar }: Props) {
                             onClick={() => eliminar(t.id)}
                             className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition duration-200">
                             Eliminar
-                        </button>
+                        </button>   {/*no sabia si hacerle tambien un boton de completado tambien, asi que solo puse el de eliminar*/}
                     </div>
                 ))}
             </div>

@@ -7,13 +7,10 @@ type Props = {
 }
 export default function MostrarCompletadas({ tareas, eliminar }: Props) {
 
-    const completadas = tareas.filter(t => t.completada);
+    const completadas = tareas.filter(t => t.completada); //filtramos las tareas completadas
 
     return (
         <div>
-            <h2 className="text-3xl font-bold text-green-700 mb-6">
-                Tareas Completadas
-            </h2>
 
             <div className="grid gap-5">
                 {completadas.map((t) => (
