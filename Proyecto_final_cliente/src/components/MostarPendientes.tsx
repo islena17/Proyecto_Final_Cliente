@@ -1,14 +1,17 @@
-import { Tarea } from "../models/Tarea";
+import type { Tarea } from "../models/Tarea";
+
 
 type Props = {
 
   tareas: Tarea[];
   completar: (id: string)=>void;
-  eliminar: (id: string)=>void; //esto es para llamar al array de tareas que creamos en formularioTarea
+  eliminar: (id: string)=>void;
+  editar: (id:string) => void; //esto es para llamar al array de tareas que creamos en formularioTarea
 }
 
-export default function MostrarPendientes({ tareas, completar, eliminar }: Props) {
-  const pendientes = tareas.filter(t => !t.completada); //filtramos a todas las tareas que (por defecto) son pendientes 
+export default function MostrarPendientes({ tareas, completar, eliminar, editar }: Props) {
+  const fechaActual = new Date();
+  const pendientes = tareas.filter(t => !t.completada && t.fechaLimite > fechaActual); //filtramos a todas las tareas que (por defecto) son pendientes 
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
@@ -31,6 +34,10 @@ export default function MostrarPendientes({ tareas, completar, eliminar }: Props
                 <span className="font-medium">Descripción:</span> {t.descripcion}
               </p>
 
+              <p className="text-gray-700 mb-3">
+                <span className="font-medium">Fecha Limite:</span> {t.fechaLimite.toLocaleDateString()}
+              </p>
+
               <p className="text-gray-600 mb-5">
                 <span className="font-medium">Asignada a:</span> {t.nombre}
               </p>
@@ -47,6 +54,14 @@ export default function MostrarPendientes({ tareas, completar, eliminar }: Props
                 className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition duration-200"
               >
                 Eliminar
+              </button>
+
+              
+              <button
+                onClick={() => editar(t.id)}
+                className="w-full bg-white-500 text-blue py-2 rounded-lg hover:bg-white-600 transition duration-200"
+              >
+                Editar
               </button>
             </div>
           ))}

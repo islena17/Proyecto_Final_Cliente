@@ -1,4 +1,5 @@
-import { Tarea } from "../models/Tarea";
+import type { Tarea } from "../models/Tarea";
+
 
 type Props = {
     tareas: Tarea[];
@@ -8,7 +9,7 @@ type Props = {
 export default function MostrarAtrasadas({ tareas, eliminar }: Props) {
 
     const fechaActual = new Date();
-    const atrasadas = tareas.filter(t => t.fechaLimite < fechaActual);// no lo he podido testear
+    const atrasadas = tareas.filter(t => t.fechaLimite < fechaActual && !t.completada);// no lo he podido testear
 
     return (
 
@@ -29,6 +30,10 @@ export default function MostrarAtrasadas({ tareas, eliminar }: Props) {
 
                         <p className="text-gray-700 mb-2">
                             <span className="font-medium">Descripción:</span> {t.descripcion}
+                        </p>
+
+                        <p className="text-gray-700 mb-3">
+                            <span className="font-medium">Fecha Limite:</span> {t.fechaLimite.toLocaleDateString()}
                         </p>
 
                         <p className="text-gray-600">

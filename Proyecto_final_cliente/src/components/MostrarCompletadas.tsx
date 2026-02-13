@@ -1,4 +1,5 @@
-import { Tarea } from "../models/Tarea";
+import type { Tarea } from "../models/Tarea";
+
 
 type Props = {
     tareas: Tarea[];
