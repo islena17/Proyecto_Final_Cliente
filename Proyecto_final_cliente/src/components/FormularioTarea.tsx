@@ -23,7 +23,9 @@ export default function FormularioTarea({ crear }: Props) {
 
     const nueva: Tarea = {
       id: crypto.randomUUID(),
-      nombre, titulo, descripcion,
+      nombre, 
+      titulo, 
+      descripcion,
       estado: "pendiente",
       completada: false,
       fechaCreacion: new Date(),
